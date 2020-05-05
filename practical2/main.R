@@ -21,4 +21,4 @@ violations <- violatedEdits(E, df.complete)
 summary(violations)
 plot(violations)
 
-box.plot(df.complete$Sepal.Length)
+boxplot(df.complete$Sepal.Length)
