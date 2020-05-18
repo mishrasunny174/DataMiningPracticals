@@ -11,15 +11,14 @@ test <- iris[-(1:smp_size), ]
 
 model <- naiveBayes(Species ~ ., data = train)
 prediction <- predict(model, test)
-View(confusionMatrix(prediction, test[,5])$table, 'NaiveBayes using Holdout')
+confusionMatrix(prediction, test[,5])
 
 model <- rpart(Species ~ ., data = train)
 prediction <- predict(model, test, type = "class")
-View(confusionMatrix(prediction, test[,5])$table, 'Decision Tree using Holdout')
+confusionMatrix(prediction, test[,5])
 
 prediction = knn(train[,-5], test[,-5], factor(train[,5]), k = 10)
-View(confusionMatrix(prediction, test[,5])$table, 'KNN using Holdout')
-
+confusionMatrix(prediction, test[,5])
 #Random Subsampling
 smp_size <- floor(0.75 * nrow(iris))
 set.seed(123)
@@ -29,26 +28,27 @@ test <- iris[-train_ind, ]
 
 model <- naiveBayes(Species ~ ., data = train)
 prediction <- predict(model, test)
-View(confusionMatrix(prediction, test[,5])$table, 'NaiveBayes using Random Sampling')
+confusionMatrix(prediction, test[,5])
 
 model <- rpart(Species ~ ., data = train)
 prediction <- predict(model, test, type = "class")
-View(confusionMatrix(prediction, test[,5])$table, 'Decision Tree using Random Sampling')
+confusionMatrix(prediction, test[,5])
 
 prediction = knn(train[,-5], test[,-5], factor(train[,5]), k = 10)
-View(confusionMatrix(prediction, test[,5])$table, 'KNN using Random Sampling')
+confusionMatrix(prediction, test[,5])
 
 train_control <- trainControl(method="cv", number=10)
 model <- train(Species~., data=iris, trControl=train_control, method="nb")
 prediction <- predict(model, test)
-View(confusionMatrix(prediction, test[,5])$table, 'NaiveBayes using KFOLD')
+confusionMatrix(prediction, test[,5])
 
 train_control <- trainControl(method="cv", number=10)
 model <- train(Species~., data=iris, trControl=train_control, method="rpart")
 prediction <- predict(model, test)
-View(confusionMatrix(prediction, test[,5])$table, 'Decision Tree using KFOLD')
+confusionMatrix(prediction, test[,5])$table
 
 train_control <- trainControl(method="cv", number=10)
 model <- train(Species~., data=iris, trControl=train_control, method="knn")
 prediction <- predict(model, test)
-View(confusionMatrix(prediction, test[,5])$table, 'KNN using KFOLD')
+confusionMatrix(prediction, test[,5])
+

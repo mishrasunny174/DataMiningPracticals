@@ -1,7 +1,8 @@
-install.packages("dbscan")
+# install.packages("dbscan")
 
 library(dbscan)
-View(iris)
+str(iris)
+
 #kmeans
 cl <- kmeans(iris[,-5], 3)
 plot(iris[,-5], col = cl$cluster)
