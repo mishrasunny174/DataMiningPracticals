@@ -1,4 +1,4 @@
-setwd("./practical3/")
+setwd("../practical3/")
 df <- read.csv(file = "wine.csv", sep = ";")
 
 isNormalized <- function(df) {
